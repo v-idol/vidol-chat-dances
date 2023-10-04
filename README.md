@@ -4,7 +4,7 @@
 
 ## How to submit dance
 
-If you wish to add an dance onto the index, make an entry in `dance` directory using `dance_template.json`, write a short description then open as a pull request ty!
+If you wish to add an dance onto the index, make an entry in `dances` directory using `dance_template.json`, write a short description then open as a pull request ty!
 
 ### Step by step instructions
 
@@ -14,11 +14,11 @@ If you wish to add an dance onto the index, make an entry in `dance` directory u
 
 3. Fill in the copy and rename it appropriately
 
-4. Move it into `dance` directory
+4. Move it into `dances` directory
 
 5. Submit a pull request and wait for review.
 
-- dance pull requests targets [`dance branch`](https://github.com/v-idol/vidol-chat-dance/tree/dance), after merge it is automatically assembled and deployed to [`main branch`](https://github.com/v-idol/vidol-chat-dance/tree/main) using GitHub Actions.
+- dance pull requests targets [`dances branch`](https://github.com/v-idol/vidol-chat-dance/tree/dances), after merge it is automatically assembled and deployed to [`main branch`](https://github.com/v-idol/vidol-chat-dance/tree/main) using GitHub Actions.
 
 - Don't edit the `index.json` directly and don't modify any other files unless you have a special reason.
 
