@@ -38,27 +38,27 @@ def read_dance_dir():
 def update_index(exts: dict):
     # update existing remove removed and add new dance
     with open(build_index_path, 'r') as f:
-        existing_dance_list = {extension['url']: extension for extension in json.load(f)[
+        existing_dance_list = {dance['url']: dance for dance in json.load(f)[
             'dance']}
 
-    for dance_list_url, extension in exts.items():
+    for dance_list_url, dance in exts.items():
         if dance_list_url in existing_dance_list.keys():
-            existing_dance_list[dance_list_url].update(extension)
+            existing_dance_list[dance_list_url].update(dance)
         else:
-            existing_dance_list[dance_list_url] = extension
-    dance_list_list = [extension for dance_list_url,
-                   extension in existing_dance_list.items() if dance_list_url in dance_list]
-    extension_index = {'dance_list': dance_list_list}
+            existing_dance_list[dance_list_url] = dance
+    dance_list_list = [dance for dance_list_url,
+                   dance in existing_dance_list.items() if dance_list_url in dance_list]
+    dance_index = {'dance_list': dance_list_list}
 
     with open(build_index_path, 'w') as f:
-        json.dump(extension_index, f, indent=4)
-    return extension_index
+        json.dump(dance_index, f, indent=4)
+    return dance_index
 
 
 def update_main_index(index: dict):
     # add keys from main/index that are not in dance_list to dance_list as new main/index
     with open(deploy_index_path, 'r') as f:
-        main_exts = {dance_list['url']: dance for dance in json.load(f)[
+        main_exts = {dance['url']: dance for dance in json.load(f)[
             'dance']}
 
     index_ext = {dance['url']: dance for dance in index['dance']}
