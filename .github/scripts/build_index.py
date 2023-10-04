@@ -39,7 +39,7 @@ def update_index(exts: dict):
     # update existing remove removed and add new list
     with open(build_index_path, 'r') as f:
         existing_list = {extension['url']: extension for extension in json.load(f)[
-            'list']}
+            'dance']}
 
     for list_url, extension in exts.items():
         if list_url in existing_list.keys():
@@ -48,7 +48,7 @@ def update_index(exts: dict):
             existing_list[list_url] = extension
     list_list = [extension for list_url,
                  extension in existing_list.items() if list_url in list]
-    extension_index = {'list': list_list}
+    extension_index = {'dance': list_list}
 
     with open(build_index_path, 'w') as f:
         json.dump(extension_index, f, indent=4)
@@ -59,9 +59,9 @@ def update_main_index(index: dict):
     # add keys from main/index that are not in list to list as new main/index
     with open(deploy_index_path, 'r') as f:
         main_exts = {list['url']: dance for dance in json.load(f)[
-            'list']}
+            'dance']}
 
-    index_ext = {dance['url']: dance for dance in index['list']}
+    index_ext = {dance['url']: dance for dance in index['dance']}
     index_ext_urls = index_ext.keys()
     for main_ext_url, main_ext in main_exts.items():
         if main_ext_url in index_ext_urls:
@@ -71,7 +71,7 @@ def update_main_index(index: dict):
                     index_ext[main_ext_url][main_exts_key] = main_ext[main_exts_key]
 
     new_main_index = {
-        'list': list(index_ext.values())}
+        'dance': list(index_ext.values())}
     with open(deploy_index_path, 'w') as f:
         json.dump(new_main_index, f, indent=4)
     return new_main_index
@@ -87,7 +87,7 @@ if __name__ == "__main__":
 
     build_index_path = Path(args.build_branch).joinpath('index.json')
     deploy_index_path = Path(args.deploy_branch).joinpath('index.json')
-    list_dir = Path(args.build_branch).joinpath('list')
+    list_dir = Path(args.build_branch).joinpath('dance')
 
     # read entries
     list = read_dance_dir()
@@ -100,7 +100,7 @@ if __name__ == "__main__":
     validate.validate_index(build_index_path)
     validate.validate_index(deploy_index_path)
 
-    assert len(dance_index_ext["list"]) == len(dance_index_main["list"]
-                                               ), f'entry count mismatch: {len(dance_index_ext["list"])} {len(dance_index_main["list"])}'
+    assert len(dance_index_ext["dance"]) == len(dance_index_main["dance"]
+                                               ), f'entry count mismatch: {len(dance_index_ext["dance"])} {len(dance_index_main["dance"])}'
     print(
-        f'::notice::{len(dance_index_ext["list"])} list')
+        f'::notice::{len(dance_index_ext["dance"])} dance')
