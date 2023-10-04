@@ -23,12 +23,15 @@
             "url": "https://github.com/v-idol/vidol-dance-gokuraku.git",
             "description": "\u300a\u5343\u672c\u6a31\u300b\uff08\u65e5\u8bed\uff1a\u5343\u672c\u685c\uff0f\u305b\u3093\u307c\u3093\u3056\u304f\u3089 Senbon Zakura\uff09\u662f\u7531\u9ed1\u5154P\u4f5c\u66f2\u53ca\u586b\u8bcd\u3001\u4f7f\u7528\u865a\u62df\u5973\u6027\u6b4c\u624b\u8f6f\u4ef6\u521d\u97f3\u672a\u6765\u5236\u4f5c\u7684\u6b4c\u66f2",
             "created": "2023-10-04"
+<<<<<<< HEAD
         },
         {
             "name": "\u5f00\u5fc3\u6447",
             "url": "https://github.com/v-idol/vidol-dance-sample.git",
             "description": "\u4e2d\u56fd\u5927\u9646\u7f51\u7edc\u6d41\u884c\u77ed\u821e\u5f00\u5fc3\u6447",
             "created": "2023-10-04"
+=======
+>>>>>>> c7b0fd5 (chore: add dances)
         }
     ]
 }
