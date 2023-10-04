@@ -49,7 +49,7 @@ def validate_entry(file: Path):
     return git_url.group(1)
 
 
-def validate_agent_entrys(ext_dir: Path):
+def validate_dance_entrys(ext_dir: Path):
     urls = []
     for f in Path(ext_dir).iterdir():
         if f.is_file() and f.suffix.lower() == '.json':
@@ -63,6 +63,6 @@ def validate_agent_entrys(ext_dir: Path):
 if __name__ == "__main__":
     base_dir = Path(__file__).parent.parent.parent
 
-    validate_agent_entrys(base_dir.joinpath('dances'))
+    validate_dance_entrys(base_dir.joinpath('dances'))
 
     validate_index(base_dir.joinpath('index.json'))

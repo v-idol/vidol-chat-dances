@@ -6,7 +6,7 @@ import json
 import validate
 
 
-def read_agent(file: Path):
+def read_dance(file: Path):
     with open(file, 'r') as f:
         dance = json.load(f)
     for required_key in [
@@ -26,11 +26,11 @@ def read_agent(file: Path):
     return dance
 
 
-def read_agent_dir():
+def read_dance_dir():
     dances = {}
-    for f in agents_dir.iterdir():
+    for f in dances_dir.iterdir():
         if f.is_file() and f.suffix.lower() == '.json':
-            dance = read_agent(f)
+            dance = read_dance(f)
             dances[dance['url']] = dance
     return dances
 
@@ -38,21 +38,21 @@ def read_agent_dir():
 def update_index(exts: dict):
     # update existing remove removed and add new dances
     with open(build_index_path, 'r') as f:
-        existing_agents = {extension['url']: extension for extension in json.load(f)[
+        existing_dances = {dance['url']: dance for dance in json.load(f)[
             'dances']}
 
-    for agents_url, extension in exts.items():
-        if agents_url in existing_agents.keys():
-            existing_agents[agents_url].update(extension)
+    for dances_url, dance in exts.items():
+        if dances_url in existing_dances.keys():
+            existing_dances[dances_url].update(dance)
         else:
-            existing_agents[agents_url] = extension
-    agents_list = [extension for agents_url,
-                   extension in existing_agents.items() if agents_url in dances]
-    extension_index = {'dances': agents_list}
+            existing_dances[dances_url] = dance
+    dances_list = [dance for dances_url,
+                   dance in existing_dances.items() if dances_url in dances]
+    dance_index = {'dances': dances_list}
 
     with open(build_index_path, 'w') as f:
-        json.dump(extension_index, f, indent=4)
-    return extension_index
+        json.dump(dance_index, f, indent=4)
+    return dance_index
 
 
 def update_main_index(index: dict):
@@ -87,20 +87,20 @@ if __name__ == "__main__":
 
     build_index_path = Path(args.build_branch).joinpath('index.json')
     deploy_index_path = Path(args.deploy_branch).joinpath('index.json')
-    agents_dir = Path(args.build_branch).joinpath('dances')
+    dances_dir = Path(args.build_branch).joinpath('dances')
 
     # read entries
-    dances = read_agent_dir()
+    dances = read_dance_dir()
 
     # update indexs
-    agent_index_ext = update_index(dances)
-    agent_index_main = update_main_index(agent_index_ext)
+    dance_index_ext = update_index(dances)
+    dance_index_main = update_main_index(dance_index_ext)
 
     # validate
     validate.validate_index(build_index_path)
     validate.validate_index(deploy_index_path)
 
-    assert len(agent_index_ext["dances"]) == len(agent_index_main["dances"]
-                                                 ), f'entry count mismatch: {len(agent_index_ext["dances"])} {len(agent_index_main["dances"])}'
+    assert len(dance_index_ext["dances"]) == len(dance_index_main["dances"]
+                                                 ), f'entry count mismatch: {len(dance_index_ext["dances"])} {len(dance_index_main["dances"])}'
     print(
-        f'::notice::{len(agent_index_ext["dances"])} dances')
+        f'::notice::{len(dance_index_ext["dances"])} dances')
