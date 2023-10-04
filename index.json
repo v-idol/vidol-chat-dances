@@ -1,3 +1,28 @@
 {
-  "dances": []
+    "dances": [
+        {
+            "name": "\u4e66\u8bb0\u821e 2023",
+            "url": "https://github.com/v-idol/vidol-dance-shujiwu.git",
+            "description": "\u85e4\u539f\u5343\u82b1\uff08\u65e5\u8bed\uff1a\u85e4\u539f \u5343\u82b1\uff0f\u3075\u3058\u308f\u3089 \u3061\u304b Fujiwara Chika\uff09\u662f\u6f2b\u753b\u7cfb\u5217\u300a\u8f89\u591c\u5927\u5c0f\u59d0\u60f3\u8ba9\u6211\u544a\u767d\uff5e\u5929\u624d\u4eec\u7684\u604b\u7231\u5934\u8111\u6218\uff5e\u300b\uff08\u4e0b\u7b80\u79f0\u300a\u8f89\u591c\u5927\u5c0f\u59d0\u300b\uff09\u7684\u865a\u6784\u89d2\u8272",
+            "created": "2023-10-04"
+        },
+        {
+            "name": "\u300a\u53ee\u53ee\u5f53\u5f53\u300b\u4e58\u98ce2023",
+            "url": "https://github.com/v-idol/vidol-dance-dingdingdangdhang.git",
+            "description": "\u300a\u53ee\u53ee\u5f53\u5f53\u300b\u4e58\u98ce2023\u4e00\u516c\u6f14\u51fa\uff08Ella\u9648\u5609\u6866\u3001Chi Pu\u829d\u8299\u3001\u5f20\u5609\u502a\u3001\u5434\u5029\uff09",
+            "created": "2023-10-04"
+        },
+        {
+            "name": "Last Surprise (\u2730Taku Takahashi Remix)",
+            "url": "https://github.com/v-idol/vidol-dance-last-surprise.git",
+            "description": "\u539f\u4f5c\u6e38\u620f\u300aP5\u300b\u5973\u795e\u5f02\u95fb\u5f55\u7684\u63d2\u66f2",
+            "created": "2023-10-04"
+        },
+        {
+            "name": "\u5343\u672c\u6a31",
+            "url": "https://github.com/v-idol/vidol-dance-gokuraku.git",
+            "description": "\u300a\u5343\u672c\u6a31\u300b\uff08\u65e5\u8bed\uff1a\u5343\u672c\u685c\uff0f\u305b\u3093\u307c\u3093\u3056\u304f\u3089 Senbon Zakura\uff09\u662f\u7531\u9ed1\u5154P\u4f5c\u66f2\u53ca\u586b\u8bcd\u3001\u4f7f\u7528\u865a\u62df\u5973\u6027\u6b4c\u624b\u8f6f\u4ef6\u521d\u97f3\u672a\u6765\u5236\u4f5c\u7684\u6b4c\u66f2",
+            "created": "2023-10-04"
+        }
+    ]
 }
