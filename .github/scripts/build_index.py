@@ -6,7 +6,7 @@ import json
 import validate
 
 
-def read_dance(file: Path):
+def read_agent(file: Path):
     with open(file, 'r') as f:
         dance = json.load(f)
     for required_key in [
@@ -26,42 +26,42 @@ def read_dance(file: Path):
     return dance
 
 
-def read_dance_dir():
-    dance_list = {}
-    for f in dance_dir.iterdir():
+def read_agent_dir():
+    dances = {}
+    for f in agents_dir.iterdir():
         if f.is_file() and f.suffix.lower() == '.json':
-            dance = read_dance(f)
-            dance_list[dance['url']] = dance
-    return dance_list
+            dance = read_agent(f)
+            dances[dance['url']] = dance
+    return dances
 
 
 def update_index(exts: dict):
-    # update existing remove removed and add new dance
+    # update existing remove removed and add new dances
     with open(build_index_path, 'r') as f:
-        existing_dance_list = {dance['url']: dance for dance in json.load(f)[
-            'dance']}
+        existing_agents = {extension['url']: extension for extension in json.load(f)[
+            'dances']}
 
-    for dance_list_url, dance in exts.items():
-        if dance_list_url in existing_dance_list.keys():
-            existing_dance_list[dance_list_url].update(dance)
+    for agents_url, extension in exts.items():
+        if agents_url in existing_agents.keys():
+            existing_agents[agents_url].update(extension)
         else:
-            existing_dance_list[dance_list_url] = dance
-    dance_list_list = [dance for dance_list_url,
-                   dance in existing_dance_list.items() if dance_list_url in dance_list]
-    dance_index = {'dance_list': dance_list_list}
+            existing_agents[agents_url] = extension
+    agents_list = [extension for agents_url,
+                   extension in existing_agents.items() if agents_url in dances]
+    extension_index = {'dances': agents_list}
 
     with open(build_index_path, 'w') as f:
-        json.dump(dance_index, f, indent=4)
-    return dance_index
+        json.dump(extension_index, f, indent=4)
+    return extension_index
 
 
 def update_main_index(index: dict):
-    # add keys from main/index that are not in dance_list to dance_list as new main/index
+    # add keys from main/index that are not in dances to dances as new main/index
     with open(deploy_index_path, 'r') as f:
         main_exts = {dance['url']: dance for dance in json.load(f)[
-            'dance']}
+            'dances']}
 
-    index_ext = {dance['url']: dance for dance in index['dance']}
+    index_ext = {dance['url']: dance for dance in index['dances']}
     index_ext_urls = index_ext.keys()
     for main_ext_url, main_ext in main_exts.items():
         if main_ext_url in index_ext_urls:
@@ -71,7 +71,7 @@ def update_main_index(index: dict):
                     index_ext[main_ext_url][main_exts_key] = main_ext[main_exts_key]
 
     new_main_index = {
-        'dance': list(index_ext.values())}
+        'dances': list(index_ext.values())}
     with open(deploy_index_path, 'w') as f:
         json.dump(new_main_index, f, indent=4)
     return new_main_index
@@ -87,20 +87,20 @@ if __name__ == "__main__":
 
     build_index_path = Path(args.build_branch).joinpath('index.json')
     deploy_index_path = Path(args.deploy_branch).joinpath('index.json')
-    dance_dir = Path(args.build_branch).joinpath('dance')
+    agents_dir = Path(args.build_branch).joinpath('dances')
 
     # read entries
-    dance_list = read_dance_dir()
+    dances = read_agent_dir()
 
     # update indexs
-    dance_index_ext = update_index(dance_list)
-    dance_index_main = update_main_index(dance_index_ext)
+    agent_index_ext = update_index(dances)
+    agent_index_main = update_main_index(agent_index_ext)
 
     # validate
     validate.validate_index(build_index_path)
     validate.validate_index(deploy_index_path)
 
-    assert len(dance_index_ext["dance"]) == len(dance_index_main["dance"]
-                                                 ), f'entry count mismatch: {len(dance_index_ext["dance"])} {len(dance_index_main["dance"])}'
+    assert len(agent_index_ext["dances"]) == len(agent_index_main["dances"]
+                                                 ), f'entry count mismatch: {len(agent_index_ext["dances"])} {len(agent_index_main["dances"])}'
     print(
-        f'::notice::{len(dance_index_ext["dance"])} dance')
+        f'::notice::{len(agent_index_ext["dances"])} dances')
